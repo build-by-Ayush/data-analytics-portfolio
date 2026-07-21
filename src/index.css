@@ -1,0 +1,297 @@
+@import "tailwindcss";
+
+@theme {
+  --color-navy-950: #060a14;
+  --color-navy-900: #080c18;
+  --color-navy-800: #0c1224;
+  --color-navy-700: #111a34;
+  --color-navy-600: #172044;
+  --color-slate-glass: rgba(12, 16, 32, 0.55);
+  --color-slate-glass-light: rgba(18, 24, 48, 0.45);
+  --color-accent-indigo: #6366f1;
+  --color-accent-violet: #8b5cf6;
+  --color-accent-cyan: #22d3ee;
+  --color-accent-blue: #3b82f6;
+  --color-accent-gold: #d4a853;
+  --color-accent-amber: #c9952c;
+  --color-accent-silver: #cbd5e1;
+  --color-text-primary: rgba(255, 255, 255, 0.95);
+  --color-text-secondary: rgba(180, 195, 215, 0.85);
+  --color-text-muted: rgba(120, 140, 170, 0.7);
+  --color-border-glass: rgba(255, 255, 255, 0.08);
+  --color-border-glow: rgba(99, 102, 241, 0.15);
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: #070b15;
+  color: var(--color-text-primary);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
+}
+
+#root {
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(99, 102, 241, 0.25); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(99, 102, 241, 0.4); }
+
+/* ═══════════════════════════════════════
+   AMBIENT LIGHT LAYER — behind glass
+   ═══════════════════════════════════════ */
+.ambient-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+.ambient-orb { position: absolute; border-radius: 50%; }
+
+.ambient-orb-1 {
+  width: 1400px; height: 1100px;
+  background: radial-gradient(ellipse, rgba(99,102,241,0.12) 0%, rgba(139,92,246,0.05) 40%, transparent 70%);
+  filter: blur(140px);
+  top: -20%; left: -15%;
+  animation: amb1 55s ease-in-out infinite;
+}
+.ambient-orb-2 {
+  width: 1200px; height: 900px;
+  background: radial-gradient(ellipse, rgba(34,211,238,0.08) 0%, rgba(59,130,246,0.04) 40%, transparent 70%);
+  filter: blur(150px);
+  bottom: -25%; right: -20%;
+  animation: amb2 48s ease-in-out infinite;
+}
+.ambient-orb-3 {
+  width: 1000px; height: 800px;
+  background: radial-gradient(ellipse, rgba(139,92,246,0.08) 0%, rgba(212,168,83,0.03) 40%, transparent 70%);
+  filter: blur(130px);
+  top: 15%; right: 5%;
+  animation: amb3 42s ease-in-out infinite;
+}
+@keyframes amb1 { 0%,100%{transform:translate(0,0)} 33%{transform:translate(8vw,6vh)} 66%{transform:translate(3vw,12vh)} }
+@keyframes amb2 { 0%,100%{transform:translate(0,0)} 40%{transform:translate(-6vw,-5vh)} 75%{transform:translate(-10vw,-8vh)} }
+@keyframes amb3 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-5vw,4vh)} }
+
+/* ═══════════════════════════════════════
+   PREMIUM GLASS PANELS
+   Luminous edge glow + purple corner
+   ═══════════════════════════════════════ */
+.glass-panel {
+  background: linear-gradient(
+    145deg,
+    rgba(15, 20, 45, 0.38) 0%,
+    rgba(20, 28, 60, 0.28) 50%,
+    rgba(12, 16, 40, 0.35) 100%
+  );
+  backdrop-filter: blur(40px) saturate(1.5) brightness(1.18);
+  -webkit-backdrop-filter: blur(40px) saturate(1.5) brightness(1.18);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 16px;
+  position: relative;
+  overflow: hidden;
+  box-shadow:
+    /* Large soft halo */
+    0 0 22px rgba(34, 211, 238, 0.08),
+    0 0 48px rgba(34, 211, 238, 0.06),
+    0 0 90px rgba(99, 102, 241, 0.045),
+
+    /* Normal shadow */
+    0 12px 36px rgba(0,0,0,.34),
+    0 4px 14px rgba(0,0,0,.22),
+
+    /* Glass highlight */
+    inset 0 1px 0 rgba(255,255,255,.12),
+    inset 0 0 36px rgba(255,255,255,.02);
+}
+
+/* Top edge highlight — frosted glass light catch */
+.glass-panel::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(
+  90deg,
+  transparent,
+  rgba(255,255,255,.18) 15%,
+  rgba(34,211,238,.28) 35%,
+  rgba(255,255,255,.24) 50%,
+  rgba(139,92,246,.16) 70%,
+  transparent
+  );
+  z-index: 2;
+}
+
+/* Purple corner illumination — bottom-right */
+.glass-panel::after {
+  content: '';
+  position: absolute;
+  bottom: -40px; right: -40px;
+  width: 200px; height: 200px;
+  background: radial-gradient(circle at center,
+    rgba(139, 92, 246, 0.08) 0%,
+    rgba(139, 92, 246, 0.04) 35%,
+    transparent 70%
+  );
+  filter: blur(20px);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.glass-panel > * { position: relative; z-index: 3; }
+
+.glass-panel-hover {
+  transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+}
+.glass-panel-hover:hover {
+  transform: translateY(-3px);
+  box-shadow:
+    0 0 28px rgba(34,211,238,.11),
+    0 0 60px rgba(34,211,238,.08),
+    0 0 100px rgba(99,102,241,.06),
+
+    0 18px 48px rgba(0,0,0,.38),
+    0 6px 18px rgba(0,0,0,.26),
+
+    inset 0 1px 0 rgba(255,255,255,.14),
+    inset 0 0 36px rgba(255,255,255,.03);
+  border-color: rgba(34, 211, 238, 0.12);
+}
+
+/* Inner card — nested glass for sub-elements */
+.glass-inner {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+.glass-inner:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.glass-certificate{
+    background:
+        linear-gradient(
+            145deg,
+            rgba(38,44,72,.58),
+            rgba(28,33,58,.48)
+        );
+
+    backdrop-filter:blur(28px) saturate(180%);
+    -webkit-backdrop-filter:blur(28px) saturate(180%);
+
+    border:1px solid rgba(255,255,255,.12);
+
+    border-radius:14px;
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.12),
+        inset 0 -1px 0 rgba(255,255,255,.04),
+        0 12px 35px rgba(0,0,0,.28),
+        0 0 24px rgba(120,120,255,.08);
+
+    transition:.35s;
+}
+
+.glass-certificate:hover{
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(45,52,84,.62),
+            rgba(34,39,66,.52)
+        );
+
+    border-color:rgba(255,255,255,.18);
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.16),
+        inset 0 -1px 0 rgba(255,255,255,.05),
+        0 18px 45px rgba(0,0,0,.35),
+        0 0 30px rgba(120,120,255,.12);
+
+    transform:translateY(-2px);
+}
+
+/* ── Section label (gold) ── */
+.section-label {
+  color: var(--color-accent-gold);
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* ── Entrance ── */
+.section-fade {
+  animation: section-enter 0.45s ease-out forwards;
+}
+@keyframes section-enter {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Pill buttons ── */
+.pill-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 16px;
+  border-radius: 9999px;
+  font-size: 12px;
+  font-weight: 500;
+  transition: all 0.25s ease;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--color-text-secondary);
+}
+.pill-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--color-text-primary);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+.pill-btn-primary {
+  background: rgba(99, 102, 241, 0.15);
+  border-color: rgba(99, 102, 241, 0.25);
+  color: var(--color-accent-indigo);
+}
+.pill-btn-primary:hover {
+  background: rgba(99, 102, 241, 0.25);
+  border-color: rgba(99, 102, 241, 0.4);
+}
+
+/* ── Status badges ── */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px;
+  border-radius: 9999px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+.badge-active {
+  background: rgba(34, 211, 238, 0.12);
+  border: 1px solid rgba(34, 211, 238, 0.2);
+  color: #22d3ee;
+}
+.badge-completed {
+  background: rgba(99, 102, 241, 0.12);
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  color: #818cf8;
+}
