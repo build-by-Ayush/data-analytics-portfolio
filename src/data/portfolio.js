@@ -6,7 +6,7 @@ export const profile = {
   name: 'Ayush Srivastava',
   title: 'Data Analyst',
   tagline: 'Microsoft Certified: Power BI Data Analyst Associate',
-  avatar: '/avatar.jpg', // Place your photo in /public/avatar.jpg
+  avatar: '/avatar.jpeg', // Place your photo in /public/avatar.jpg
   aboutShort: {
     headline:
       'I combine engineering logic with data storytelling to turn messy datasets into clear business decisions.',

@@ -350,10 +350,11 @@ function ProfileHeader() {
           boxShadow: '0 0 25px rgba(34, 211, 238, 0.12), 0 0 50px rgba(99, 102, 241, 0.06)',
         }}
       >
-        <div className="w-full h-full bg-gradient-to-br from-accent-indigo/30 to-accent-violet/20
-          flex items-center justify-center text-3xl font-bold text-accent-cyan">
-          {profile.name.charAt(0)}
-        </div>
+        <img
+          src={profile.avatar}
+          alt={profile.name}
+          className="w-full h-full object-cover"
+        />
       </div>
       <div className="flex-1 min-w-0">
         <h1 className="text-2xl font-bold text-text-primary tracking-tight">{profile.name}</h1>
