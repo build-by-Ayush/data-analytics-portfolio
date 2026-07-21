@@ -4,7 +4,7 @@ Hi! I'm Ayush, a **Microsoft Certified Power BI Data Analyst Associate** who lov
 
 This repository contains the source code for my interactive Data Analytics Portfolio. I built this site using a modern "Bento Box" UI to showcase my projects, SQL/Python code, and dashboard logic in a way that is clean, scannable, and easy to read.
 
-**🔗 Live Portfolio:** [Check out my Live Portfolio](https://explainable-ai-anomaly-detection-for-small-businesses-dkyywvwa.streamlit.app/) 
+**🔗 Live Portfolio:** [Check out my Live Portfolio](https://data-analytics-portfolio-gamma.vercel.app/) 
 
 ---
 
