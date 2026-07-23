@@ -115,11 +115,12 @@ export const projects = [
       },
     ],
 
+    showcaseMode: 'scroll',
     showcase: [
-      '/projects/project1/Overview 1.png',
-      '/projects/project1/Overview 2.png',
-      '/projects/project1/Funnel 1.png',
-      '/projects/project1/Funnel 2.png',
+      '/projects/project1/overview.png',
+      '/projects/project1/funnel.png',
+      '/projects/project1/return.png',
+      '/projects/project1/product.png',
     ],
 
     links: {
@@ -407,8 +408,9 @@ export const projects = [
       },
     ],
 
+    showcaseMode: 'scroll',
     showcase: [
-      '/projects/project3/KPIS_&_Health_Bar.png',
+      '/projects/project3/anomly.png',
     ],
 
     links: {

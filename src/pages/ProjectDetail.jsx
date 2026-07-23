@@ -209,7 +209,15 @@ function InsightsRenderer({ project, themeColor }) {
   );
 }
 
-function ProjectCarousel({ images, title, themeColor, current, direction, goTo }) {
+function ProjectCarousel({
+  images,
+  title,
+  themeColor,
+  current,
+  direction,
+  goTo,
+  showcaseMode = 'normal',
+}) {
   if (!images.length) {
     return (
       <div className="relative h-full w-full min-h-[280px] rounded-xl glass-inner overflow-hidden flex items-center justify-center">
@@ -246,6 +254,50 @@ function ProjectCarousel({ images, title, themeColor, current, direction, goTo }
     }),
   };
 
+  const currentImage = images[current];
+
+  if (showcaseMode === 'scroll') {
+    return (
+      <div className="relative h-full w-full min-h-[280px] rounded-xl glass-inner overflow-hidden bg-[#0b1020]">
+        <div
+          className="absolute inset-0 bg-gradient-to-br from-accent-indigo/6 to-accent-violet/3"
+          style={{
+            background: `linear-gradient(135deg, ${hexToRgba(themeColor, 0.08)}, rgba(139,92,246,0.03))`,
+          }}
+        />
+
+        <div className="absolute inset-0 overflow-y-auto overflow-x-hidden">
+          <img
+            src={currentImage}
+            alt={`${title} screenshot ${current + 1}`}
+            className="block w-full h-auto min-w-full select-none"
+            draggable={false}
+          />
+        </div>
+
+        <div className="absolute inset-0 bg-gradient-to-t from-navy-900/15 via-transparent to-transparent pointer-events-none" />
+
+        {images.length > 1 && (
+          <div className="absolute bottom-3 left-1/2 z-20 flex -translate-x-1/2 gap-1.5 rounded-full px-2 py-1 bg-black/15 backdrop-blur-sm">
+            {images.map((_, i) => (
+              <button
+                type="button"
+                key={i}
+                onClick={() => goTo(i)}
+                aria-label={`Go to screenshot ${i + 1}`}
+                className="h-1.5 rounded-full transition-all"
+                style={{
+                  width: i === current ? '18px' : '6px',
+                  background: i === current ? themeColor : 'rgba(255,255,255,0.35)',
+                }}
+              />
+            ))}
+          </div>
+        )}
+      </div>
+    );
+  }
+
   return (
     <div className="relative h-full w-full min-h-[280px] rounded-xl glass-inner overflow-hidden">
       <div
@@ -267,7 +319,7 @@ function ProjectCarousel({ images, title, themeColor, current, direction, goTo }
           className="absolute inset-0"
         >
           <img
-            src={images[current]}
+            src={currentImage}
             alt={`${title} screenshot ${current + 1}`}
             className="absolute inset-0 h-full w-full object-contain bg-[#0b1020]"
             draggable={false}
@@ -488,7 +540,7 @@ export default function ProjectDetail() {
               <h2 className="section-label">Project Showcase</h2>
             </div>
 
-                        <div className="flex-1 min-h-0 h-full">
+              <div className="flex-1 min-h-0 h-full">
               <ProjectCarousel
                 images={showcase}
                 title={project.title}
@@ -496,6 +548,7 @@ export default function ProjectDetail() {
                 current={current}
                 direction={direction}
                 goTo={goTo}
+                showcaseMode={project.showcaseMode}
               />
             </div>
 
