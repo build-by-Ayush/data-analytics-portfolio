@@ -21,7 +21,7 @@ export const profile = {
       },
       {
         title: 'Cloud-Native',
-        text: 'Expanding into Google BigQuery and dbt.',
+        text: 'Building modern transformation pipelines using Google BigQuery and dbt.',
       },
     ],
   },
@@ -42,10 +42,10 @@ works. I approach analytics in exactly the same way: identify friction, understa
 
 My Current Focus
 
-As an entry-level Data Analyst, I enjoy taking complete ownership of a problem from collecting and cleaning data to analysis, 
-dashboard development, stakeholder communication, and final reporting. I am currently strengthening my business acumen while 
-expanding into cloud analytics, and I'm looking for opportunities where I can contribute, continue learning, and grow alongside 
-an experienced team.`,
+I enjoy taking complete ownership of a problem—from engineering cloud data pipelines with dbt and BigQuery, to analysis, dashboard 
+development, and final stakeholder reporting. Currently, I am applying these skills in the proptech space to build decision ready 
+market intelligence. I'm looking for opportunities where I can contribute to real-world data challenges, continue learning, and grow 
+alongside an experienced team.`,
 
   resumeUrl: '/resume.pdf', 
   social: {
@@ -61,7 +61,7 @@ export const toolkit = [
   { name: 'SQL', logo: '/ToolLogos/sql.png', pos: { top: '5%', right: '10%' } },
   { name: 'Python', logo: '/ToolLogos/python.png', pos: { top: '30%', left: '10%' } },
   { name: 'Excel', logo: '/ToolLogos/excel.png', pos: { top: '30%', right: '11%' } },
-  { name: 'DBT', logo: '/ToolLogos/dbt.png', pos: { top: '55%', left: '10%' } },
+  { name: 'dbt Core', logo: '/ToolLogos/dbt.png', pos: { top: '55%', left: '10%' } },
   { name: 'Tableau', logo: '/ToolLogos/tableau.png', pos: { top: '55%', right: '10%' } },
   { name: 'Git', logo: '/ToolLogos/git.png', pos: { top: '80%', right: '10%' } },
   { name: 'Google Bigquery', logo: '/ToolLogos/bigquery.png', pos: { top: '80%', left: '3%' } },
@@ -1243,11 +1243,11 @@ export const experiences = [
     title: 'Data Analyst Intern',
     organization: 'Avacasa',
     logo: "/exp/avacasa.jpg",
-    duration: 'Oct 2026 — Present',
+    duration: 'Oct 2026 - Present',
     role: 'Market Research & Data Analytics',
     tagline: 'Leading a Location Deep Dive study for the Bengaluru South-West market to build decision-ready market intelligence for a proptech startup.',
     responsibilities: [
-      `Engineered end-to-end data pipelines using Python and Pandas to collect, clean, and analyze property listings, short-term rentals, and hotel supply.`,
+      `Processed and structured raw, multi-source data using Python and Pandas, transforming fragmented scraped outputs across property listings, rentals, and hotel supply into clean, analytics-ready datasets.`,
       `Computed complex cross-source financial metrics, including gross and net rental yields, to evaluate managed farmland and plotted land investments.`,
       `Conducted regulatory auditing by capturing RERA-registered project data directly from state portals to monitor compliance, litigation status, and project extensions.`,
       `Developed an interactive dashboard, structured data workbooks, and written dossiers used directly by the sales and product teams to drive active market decisions.`,
@@ -1256,7 +1256,7 @@ export const experiences = [
     overview: [
       {
         title: 'Financial Analytics: ',
-        text: 'Computed cross-source market metrics including net rental yields and price dispersion......',
+        text: 'Computed cross-source market metrics including net rental yields and price dispersion...',
       },
     ],
   },
@@ -1266,24 +1266,20 @@ export const experiences = [
     title: 'Data Analyst Intern',
     organization: 'Swizosoft',
     logo: "/exp/swizosoft.png",
-    duration: 'Feb 2026 — Jun 2026',
+    duration: 'Feb 2026 - Jun 2026',
     role: 'Data Analytics & Reporting',
     tagline: 'An intensive, execution-focused industrial program simulating complex data challenges. Acted as the lead analyst designing end-to-end solutions.',
     responsibilities: [
-      `Engineered advanced analytical features for time series data including rolling averages, 
-      volatility metrics, and Z-scores to detect structural shifts in industrial signals.`,
-      `Built robust data processing pipelines using Python and Pandas to clean, transform, and 
-      aggregate complex datasets for downstream analysis.`,
-      `Deployed an interactive Funnel Optimization Platform featuring a 4 quadrant product 
-      matrix to calculate true SKU level profitability after return processing.`,
-      `Developed a custom rule based inference engine to automatically flag critical 
-      business events, such as revenue leakage and sudden conversion friction.`,
+      `Engineered advanced analytical features for time series data including rolling averages, volatility metrics, and Z-scores to detect structural shifts in industrial signals.`,
+      `Built robust data processing pipelines using Python and Pandas to clean, transform, and aggregate complex datasets for downstream analysis.`,
+      `Deployed an interactive Funnel Optimization Platform featuring a 4-quadrant product matrix to calculate true SKU-level profitability after return processing.`,
+      `Developed a custom rule-based inference engine to automatically flag critical business events, such as revenue leakage and sudden conversion friction.`,
     ],
 
     overview: [
       {
         title: 'Business Intelligence: ',
-        text: 'Developed interactive platforms for funnel and profitability analytics......',
+        text: 'Developed interactive platforms for funnel and profitability analytics...',
       },
     ],
   },

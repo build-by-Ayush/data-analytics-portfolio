@@ -57,36 +57,20 @@ export default function Overview() {
             <div className="mt-4 text-left">
               {/* Headline */}
               <p className="text-[12.5px] font-semibold leading-[1.5] text-text-primary opacity-80">
-                I combine engineering logic with data storytelling to turn messy datasets into clear business decisions.
+                {profile.aboutShort.headline}
               </p>
 
               {/* Bullet Points */}
               <div className="mt-4 space-y-2">
-
-                <div className="flex items-start gap-2">
-                  <span className="text-accent-cyan mt-[2px]">•</span>
-                  <p className="text-[11px] leading-[1.6]">
-                    <span className="font-semibold text-text-primary">Problem-First:</span>
-                    <span className="text-text-secondary"> Solving actual friction, not just writing code.</span>
-                  </p>
-                </div>
-
-                <div className="flex items-start gap-2">
-                  <span className="text-accent-cyan mt-[2px]">•</span>
-                  <p className="text-[11px] leading-[1.6]">
-                    <span className="font-semibold text-text-primary">End-to-End:</span>
-                    <span className="text-text-secondary"> Handling everything from raw data to interactive dashboards.</span>
-                  </p>
-                </div>
-
-                <div className="flex items-start gap-2">
-                  <span className="text-accent-cyan mt-[2px]">•</span>
-                  <p className="text-[11px] leading-[1.6]">
-                    <span className="font-semibold text-text-primary">Cloud-Native:</span>
-                    <span className="text-text-secondary"> Expanding into Google BigQuery and dbt.</span>
-                  </p>
-                </div>
-
+                {profile.aboutShort.points.map((point, index) => (
+                  <div key={index} className="flex items-start gap-2">
+                    <span className="text-accent-cyan mt-[2px]">•</span>
+                    <p className="text-[11px] leading-[1.6]">
+                      <span className="font-semibold text-text-primary">{point.title}:</span>
+                      <span className="text-text-secondary"> {point.text}</span>
+                    </p>
+                  </div>
+                ))}
               </div>
 
             </div>
