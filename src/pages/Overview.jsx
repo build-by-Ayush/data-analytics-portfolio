@@ -9,8 +9,9 @@ import { profile, toolkit, projects, certificates, experiences } from '../data/p
 
 const providerLogos = {
   'Microsoft': '/ProviderLogos/microsoft.png',
-  'Infosys Springboard': '/ProviderLogos/infosys.png',
   'Udemy': '/ProviderLogos/udemy.png',
+  'dbt Labs': '/ProviderLogos/dbt.png',
+  'HackerRank': '/ProviderLogos/hr.png',
 };
 
 const stagger = {

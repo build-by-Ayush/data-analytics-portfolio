@@ -47,7 +47,7 @@ dashboard development, stakeholder communication, and final reporting. I am curr
 expanding into cloud analytics, and I'm looking for opportunities where I can contribute, continue learning, and grow alongside 
 an experienced team.`,
 
-  resumeUrl: '/resume.pdf', // Place your resume in /public/resume.pdf
+  resumeUrl: '/resume.pdf', 
   social: {
     linkedin: 'https://linkedin.com/in/ayush-srivastava-data-analyst/',
     github: 'https://github.com/build-by-Ayush/',
@@ -61,12 +61,183 @@ export const toolkit = [
   { name: 'SQL', logo: '/ToolLogos/sql.png', pos: { top: '5%', right: '10%' } },
   { name: 'Python', logo: '/ToolLogos/python.png', pos: { top: '30%', left: '10%' } },
   { name: 'Excel', logo: '/ToolLogos/excel.png', pos: { top: '30%', right: '11%' } },
-  { name: 'Looker Studio', logo: '/ToolLogos/looker.png', pos: { top: '55%', left: '9%' } },
+  { name: 'DBT', logo: '/ToolLogos/dbt.png', pos: { top: '55%', left: '10%' } },
   { name: 'Tableau', logo: '/ToolLogos/tableau.png', pos: { top: '55%', right: '10%' } },
-  { name: 'Git', logo: '/ToolLogos/git.png', pos: { top: '80%', right: '35%' } },
+  { name: 'Git', logo: '/ToolLogos/git.png', pos: { top: '80%', right: '10%' } },
+  { name: 'Google Bigquery', logo: '/ToolLogos/bigquery.png', pos: { top: '80%', left: '3%' } },
 ];
 
 export const projects = [
+  // Project — Quick-Commerce Operations
+  {
+    id: 'qcommerce-operations-command-center',
+    title: 'Quick-Commerce Operations Command Center',
+    subtitle:
+      'End-to-end SLA bottleneck analysis with dbt, BigQuery, and Power BI',
+
+    thumbnail: '/projects/project7/thumb.png',
+    status: 'Completed',
+
+    themeColor: '#A3D900',
+
+    // Used ONLY on Overview Featured Projects & Project List
+    tags: ['dbt', 'BigQuery', 'Power BI'],
+
+    // Used in Project Detail page
+    tools: [
+      'Python (Synthetic Data Simulator)',
+      'Google BigQuery',
+      'dbt Core + dbt-bigquery',
+      'Power BI Desktop',
+      'uv (Python Environment Management)',
+      'Git / GitHub',
+    ],
+
+    techniques: [
+      'Cloud ELT Pipeline Development',
+      'Profiling-Led Data Cleaning',
+      'Grain-Aware Dimensional Modeling',
+      'SLA & Stage-Duration Analysis',
+      'Operational Driver Analysis',
+      'Store-Level Performance Monitoring',
+    ],
+
+    metrics: [
+      {
+        value: '53.8',
+        unit: '%',
+        label: 'ORDER SLA BREACH RATE',
+        description:
+          'The largest absolute stage overrun against the project’s 2-minute target, prompting a deeper handoff-delay investigation.',
+      },
+      {
+        value: '25.7',
+        unit: 'min',
+        label: 'AVERAGE ORDER DELIVERY DURATION',
+        description:
+          'Exceeded the project’s 4-minute target, with picking time generally increasing across larger basket-quantity bands.',
+      },
+    ],
+
+    showcase: [
+      '/projects/project7/01_Operations_Overview.png',
+      '/projects/project7/02_Performance_Analysis.png',
+      '/projects/project7/03_Root_Cause_Analysis_1.png',
+      '/projects/project7/04_Root_Cause_Analysis_2.png',
+      '/projects/project7/05_Store_Perfomance_Analysis_1.png',
+      '/projects/project7/06_Store_Perfomance_Analysis_2.png',
+    ],
+
+    links: {
+      github: 'https://github.com/build-by-Ayush/End-to-End-Q-Commerce-Operations-Platform.git', 
+      liveDemo: null,
+      video: null,
+    },
+
+    insights: [
+      {
+        heading: 'The Business Problem',
+        paragraphs: [
+          'A high delivery SLA breach rate identifies a service problem, but not where the time is being lost. I built an operational analytics workflow to investigate which fulfilment stages accumulate the most time, which operating conditions are associated with breaches, and which stores require closer examination.',
+        ],
+      },
+
+      {
+        heading: '1. Cloud Data Pipeline & Dimensional Modeling',
+        paragraphs: [
+          'Built a Python-to-BigQuery ELT workflow using dbt to transform operational records into an analytical model for Power BI. The pipeline separates source data, cleaning, reusable lifecycle logic, and business-facing models.',
+        ],
+        bullets: [
+          {
+            title: 'Data Quality & Transformation',
+            description:
+              'Profiled raw tables and implemented evidence-based type conversion, timestamp parsing, standardization, and grain-based deduplication in dbt.',
+          },
+          {
+            title: 'Dimensional Analytics',
+            description:
+              'Designed date, store, and rider dimensions alongside order-, fulfilment-unit-, assignment-attempt-, staffing-, and daily-aggregate facts. Used a LEFT JOIN to retain fulfilment units cancelled or failed before a delivery record existed.',
+          },
+        ],
+      },
+
+      {
+        heading: '2. SLA & Stage-Level Performance',
+        paragraphs: [
+          'Defined a 20-minute delivery target with a 5-minute grace window, treating delivery durations above 25 minutes as SLA breaches. The dashboard decomposes end-to-end performance into operational stages and compares their average durations against project-defined targets.',
+        ],
+        bullets: [
+          {
+            title: 'Picking Bottleneck',
+            description:
+              'Average picking duration was approximately 6.3 minutes against a 4-minute target, and picking time increased across most larger basket-quantity bands.',
+          },
+          {
+            title: 'Handoff Delay',
+            description:
+              'Packing completion to pickup averaged approximately 6.1 minutes against a 2-minute target. Further analysis separated packing completion to rider arrival from rider arrival to pickup.',
+          },
+          {
+            title: 'Pre-Arrival Investigation',
+            description:
+              'Packing completion to rider arrival increased from 5.17 minutes with one assignment attempt to 7.66 minutes with three attempts, while rider arrival to pickup remained around 0.63 minutes. This identifies the pre-arrival interval as a priority for investigation, not a proven causal effect.',
+          },
+        ],
+      },
+
+      {
+        heading: '3. Operational Driver Analysis',
+        paragraphs: [
+          'Investigated how workload, assignment attempts, route distance, traffic, weather, staffing, and split-order status relate to delivery outcomes. The objective was to identify useful operational hypotheses rather than claim causation from descriptive comparisons.',
+        ],
+        bullets: [
+          {
+            title: 'Basket Size & Picking',
+            description:
+              'Order-level breach rates increased across the displayed quantity bands, from 26.42% to 95.43%. The stage-duration matrix showed that picking was more quantity-sensitive than most other stages.',
+          },
+          {
+            title: 'Distance & Environment',
+            description:
+              'Average transit time increased from 4.47 minutes in the distance band labelled 0 to 26.62 minutes in the band labelled 8. Traffic and weather combinations also showed differences in breach rates and transit duration.',
+          },
+          {
+            title: 'Assignment & Split Orders',
+            description:
+              'Compared stage durations across assignment-attempt counts and examined the breach-rate difference between single-store and split orders, accounting for the possibility that split orders have more opportunities for a unit-level breach.',
+          },
+        ],
+      },
+
+      {
+        heading: '4. Store Performance & Operational Monitoring',
+        paragraphs: [
+          'Built a store-level view to move from network-wide findings to specific stores and dates. The page combines store failure-rate rankings, daily processing-time trends, staffing indicators, and expandable store-day operational details.',
+        ],
+        bullets: [
+          {
+            title: 'Store-Level Performance',
+            description:
+              'The reported average store-processing time was 11m 04s, with an understaffed snapshot rate of 36.79%. The daily aggregate processing-time trend remained relatively stable around 11 minutes.',
+          },
+          {
+            title: 'Daily Investigation',
+            description:
+              'Store filters and daily operational records allow comparisons of workload, completed, cancelled and failed units, SLA breach rates, and understaffing measures.',
+          },
+        ],
+      },
+
+      {
+        heading: '5. Analytical Approach & Project Outcome',
+        paragraphs: [
+          'Organized the four-page Power BI dashboard as an investigation workflow: monitor overall performance, diagnose stage-level bottlenecks, explore associated operational drivers, and inspect store-level outcomes. The final MARTS layer provides detailed facts and daily aggregate facts for reporting, while preserving the different grains needed for reliable analysis.',
+          'The result is an end-to-end analytics engineering portfolio project demonstrating data-quality handling, warehouse transformations, dimensional modeling, metric design, and business-focused analysis. The operating targets are project assumptions, and the findings are exploratory rather than proof of causal effects.',
+        ],
+      },
+    ],
+  },
+  
   //Project 1
   {
     id: 'ecommerce-funnel',
@@ -959,6 +1130,28 @@ export const certificates = [
   },
 
   {
+    id: 'dbt-fundamentals',
+    title: 'dbt Fundamentals Badge',
+    issuer: 'dbt Labs',
+    date: '2026',
+    image: '/certs/dbt-fundamentals.png',
+
+    learned: {
+      scope:
+        'I learned how to build, test, and document data transformation pipelines directly within a cloud data warehouse using dbt.',
+
+      analytics: [
+        'Developed modular SQL models to transform raw data into structured, analytics-ready tables.',
+        'Implemented automated data quality tests (like unique and not_null) to ensure reliable reporting.',
+        'Generated automated documentation and dependency graphs (DAGs) to track data lineage.',
+      ],
+
+      takeaway:
+        'I can engineer robust, scalable data transformation workflows that bridge the gap between messy databases and clean BI dashboards.',
+    },
+  },
+
+  {
     id: 'sql-advanced',
     title: 'The Complete SQL Bootcamp',
     issuer: 'Udemy',
@@ -977,6 +1170,28 @@ export const certificates = [
 
       takeaway:
         'I can extract, shape, and analyze data using reliable SQL workflows.',
+    },
+  },
+
+  {
+    id: 'hackerrank-sql-advanced',
+    title: 'SQL (Advanced) Certificate',
+    issuer: 'HackerRank',
+    date: '2025',
+    image: '/certs/hackerrank-sql.png', // Update with your actual image path
+
+    learned: {
+      scope:
+        'I validated my ability to solve complex, real-world data extraction problems under timed technical assessment conditions.',
+
+      analytics: [
+        'Demonstrated proficiency in advanced SQL concepts, including Window Functions, CTEs, and complex joins.',
+        'Optimized multi-level subqueries to efficiently aggregate, filter, and transform relational data.',
+        'Passed a rigorous technical assessment evaluating practical, on-the-spot database querying skills.',
+      ],
+
+      takeaway:
+        'I can write highly efficient, advanced SQL queries to handle complex data manipulation and solve strict business logic requirements.',
     },
   },
 
@@ -1024,6 +1239,29 @@ export const education = {
 
 export const experiences = [
   {
+    id: 'data-analyst-intern-avacasa',
+    title: 'Data Analyst Intern',
+    organization: 'Avacasa',
+    logo: "/exp/avacasa.jpg",
+    duration: 'Oct 2026 — Present',
+    role: 'Market Research & Data Analytics',
+    tagline: 'Leading a Location Deep Dive study for the Bengaluru South-West market to build decision-ready market intelligence for a proptech startup.',
+    responsibilities: [
+      `Engineered end-to-end data pipelines using Python and Pandas to collect, clean, and analyze property listings, short-term rentals, and hotel supply.`,
+      `Computed complex cross-source financial metrics, including gross and net rental yields, to evaluate managed farmland and plotted land investments.`,
+      `Conducted regulatory auditing by capturing RERA-registered project data directly from state portals to monitor compliance, litigation status, and project extensions.`,
+      `Developed an interactive dashboard, structured data workbooks, and written dossiers used directly by the sales and product teams to drive active market decisions.`,
+    ],
+
+    overview: [
+      {
+        title: 'Financial Analytics: ',
+        text: 'Computed cross-source market metrics including net rental yields and price dispersion......',
+      },
+    ],
+  },
+  
+  {
     id: 'data-analyst-intern',
     title: 'Data Analyst Intern',
     organization: 'Swizosoft',
@@ -1044,16 +1282,8 @@ export const experiences = [
 
     overview: [
       {
-        title: 'Data Architecture: ',
-        text: 'Built automated Python pipelines and multi-table relational models.',
-      },
-      {
         title: 'Business Intelligence: ',
-        text: 'Developed interactive platforms for funnel and profitability analytics.',
-      },
-      {
-        title: 'Predictive Systems: ',
-        text: 'Engineered time-series anomaly detection using statistical metrics.',
+        text: 'Developed interactive platforms for funnel and profitability analytics......',
       },
     ],
   },
