@@ -42,7 +42,7 @@ works. I approach analytics in exactly the same way: identify friction, understa
 
 My Current Focus
 
-I enjoy taking complete ownership of a problem—from engineering cloud data pipelines with dbt and BigQuery, to analysis, dashboard 
+I enjoy taking complete ownership of a problem from engineering cloud data pipelines with dbt and BigQuery, to analysis, dashboard 
 development, and final stakeholder reporting. Currently, I am applying these skills in the proptech space to build decision ready 
 market intelligence. I'm looking for opportunities where I can contribute to real-world data challenges, continue learning, and grow 
 alongside an experienced team.`,
@@ -68,7 +68,7 @@ export const toolkit = [
 ];
 
 export const projects = [
-  // Project — Quick-Commerce Operations
+  // Project - Quick-Commerce Operations
   {
     id: 'qcommerce-operations-command-center',
     title: 'Quick-Commerce Operations Command Center',
@@ -1223,7 +1223,7 @@ export const education = {
   field: 'Computer Science & Engineering (Data Science)',
   college: 'Sai Vidya Institute Of Technology',
   location: 'Bengaluru, India',
-  duration: '2022 — 2026',
+  duration: '2022 - 2026',
   cgpa: '8.81 / 10',
   description:
     'Specialized in data science and analytics coursework alongside core CS fundamentals. Active in analytics club and hackathon competitions.',
