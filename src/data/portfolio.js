@@ -392,147 +392,169 @@ export const projects = [
   },
   //Project 2
   {
-    id: 'bmtc',
-    title: 'BMTC Transit Accessibility & Service Gap Analysis',
-    subtitle:
-      'Spatial gap analysis identifying transit supply and demand imbalances',
+  id: 'bmtc',
+  title: 'BMTC Transit Accessibility & Service Gap Analysis',
+  subtitle:
+    'Exploring bus-stop service gaps using geospatial analysis and nearby population estimates',
 
-    thumbnail: '/projects/project2/thumb.png',
-    status: "Completed",
+  thumbnail: '/projects/project2/thumb.png',
+  status: 'Completed',
 
-    themeColor: '#EAB308',
+  themeColor: '#EAB308',
 
-    // Used ONLY on Overview Featured Projects & Project List
-    tags: ['Power BI', 'Python', 'SQL'],
+  // Used ONLY on Overview Featured Projects & Project List
+  tags: ['Power BI', 'Python', 'Geospatial Analysis'],
 
-    // Used in Project Detail page
-    tools: [
-      'Power BI (DAX, Data Modeling)',
-      'Python',
-      'SQL',
-      'Power Query',
-    ],
+  // Used in Project Detail page
+  tools: [
+    'Power BI (DAX, Power Query)',
+    'Python (Pandas, GeoPandas)',
+    'GHSL Population Data',
+  ],
 
-    techniques: [
-      'Spatial Joins & Route Mapping',
-      'Custom DAX Filter Context Logic',
-      'Supply and Demand Gap Analysis',
-    ],
+  techniques: [
+    'Geospatial Analysis and Spatial Joins',
+    'Route-Stop Mapping and Clustering',
+    'Custom Demand, Supply and Gap Scores',
+    'Interactive Power BI Dashboards',
+  ],
 
-    metrics: [
-      {
-        value: '627',
-        unit: "Stops",
-        label: 'CRITICAL SERVICE GAPS',
-        description:
-          'Identified specific high-density bus stops suffering from severe supply and demand imbalance',
-      },
-      {
-        value: '50',
-        unit: "Meters",
-        label: 'SPATIAL BUFFER JOIN',
-        description:
-          'Applied geospatial logic to physically map 4,655 isolated bus stops to 4,009 transit routes',
-      },
-    ],
+  metrics: [
+    {
+      value: '4,655',
+      unit: 'Stops',
+      label: 'STOPS ANALYZED',
+      description:
+        'Prepared stop-level data with nearby population estimates and relative demand, supply and service-gap scores',
+    },
+    {
+      value: '413',
+      unit: 'Stops',
+      label: 'CRITICAL GAP FLAGS',
+      description:
+        '8.9% of analyzed stops crossed the project’s critical-gap threshold and were flagged for further review',
+    },
+  ],
 
-    showcase: [
-      '/projects/project2/Stops.png',
-      '/projects/project2/Routes 1.png',
-      '/projects/project2/Routes 2.png',
-    ],
+  showcase: [
+    '/projects/project2/Stops.png',
+    '/projects/project2/Routes 1.png',
+    '/projects/project2/Routes 2.png',
+  ],
 
-    links: {
-      github: 'https://github.com/build-by-Ayush/The-BMTC-Transit-Analysis-Dashboard.git',
-      liveDemo: null,
-      video: null,
+  links: {
+    github: 'https://github.com/build-by-Ayush/The-BMTC-Transit-Analysis-Dashboard.git',
+    liveDemo: null,
+    video: null,
+  },
+
+  insights: [
+    {
+      heading: 'The Problem',
+      paragraphs: [
+        "I wanted to explore whether recorded bus service indicators were broadly aligned with the population living near bus stops in Bengaluru. Finding data that was ready for this analysis was a challenge. The available BMTC-derived dataset provided stop locations, route geometries and service counts, but it did not provide a dependable route-to-stop mapping or actual passenger ridership data. I therefore focused on building an exploratory analysis using the available information and clearly documenting its limitations.",
+      ],
     },
 
-    insights: [
-      {
-        heading: 'The Business Problem',
-        paragraphs: [
-          "Bengaluru's rapid urban growth makes transit planning incredibly difficult. I started with a disconnected dataset containing only basic bus stop coordinates, text geometry for routes, and trip counts. There was no relational mapping between stops and routes, and no passenger volume data. To solve this, I built a geospatial intelligence system that answers a critical operational question: Are bus services actually distributed where people live?.",
-        ],
-      },
+    {
+      heading: '1. Preparing the Data',
+      paragraphs: [
+        'I used Python to clean the stop and route data and prepare it for spatial analysis. I also explored publicly available data sources for population information and integrated GHSL (Global Human Settlement Layer) population data to estimate the population surrounding each stop.',
+      ],
+      bullets: [
+        {
+          title: 'Population Around Bus Stops',
+          description:
+            'Created a 1 km catchment around each stop and estimated its surrounding population from the GHSL population raster. This provides a local population proxy, not a count of bus passengers.',
+        },
+        {
+          title: 'Connecting Stops and Routes',
+          description:
+            'Used GeoPandas to match stops within a 50 m buffer of route geometries. I then grouped nearby candidates using a 100 m clustering rule to reduce potential duplicate matches and estimate the stop sequence along each route.',
+        },
+      ],
+    },
 
-      {
-        heading: '1. Geospatial Data Engineering',
-        paragraphs: [
-          'Because the original data lacked relationship keys and demand metrics, I sourced European Union GHSL population data to estimate local transit demand.',
-        ],
-        bullets: [
-          {
-            title: 'Spatial Conversion',
-            description:
-              'Leveraged AI to assist with complex GeoPandas Python syntax, converting raw text geometries into usable spatial objects.',
-          },
-          {
-            title: 'The 50 Meter Buffer Join',
-            description:
-              'Created a metric buffer around every bus route and performed a spatial join to accurately map 4,655 isolated stops to their respective routes.',
-          },
-        ],
-      },
+    {
+      heading: '2. Comparing Demand and Supply',
+      paragraphs: [
+        'I created custom scores to compare the relative population around each stop with the available service indicators in the dataset. The scores make different measurements easier to compare, while remaining transparent about the assumptions behind them.',
+      ],
+      bullets: [
+        {
+          title: 'Demand and Supply Scores',
+          description:
+            'Used percentile-based scores for catchment population, route count and recorded trip count. The supply score gives equal weight to relative route diversity and recorded service volume.',
+        },
+        {
+          title: 'Service Gap Score',
+          description:
+            'Calculated the difference between demand and supply scores. Positive values flag stops where the population proxy ranks higher than the service proxy, helping identify locations for further investigation.',
+        },
+        {
+          title: 'Route Population and Pressure',
+          description:
+            'Combined unique population-raster cells across the inferred stop catchments of each route. Dividing this estimate by the route’s recorded trip count created a population-to-service indicator that can be compared across routes.',
+        },
+      ],
+    },
 
-      {
-        heading: '2. Solving the Density Paradox',
-        paragraphs: [
-          'Initially, summing the population along a route led to massive double counting due to overlapping 1km stop radiuses.',
-        ],
-        bullets: [
-          {
-            title: 'The Summing Circles Trap',
-            description:
-              'Discarded the misleading total population metric that heavily biased physically long routes over actually dense ones.',
-          },
-          {
-            title: 'The Pressure Index',
-            description:
-              'Engineered a custom metric by dividing the average population along a route by its total daily trips, successfully identifying routes serving massive populations but starved of actual bus frequency.',
-          },
-        ],
-      },
+    {
+      heading: '3. Building the Power BI Dashboard',
+      paragraphs: [
+        'I used Power BI and DAX to turn the prepared datasets into two interactive pages: one for exploring individual bus stops and another for comparing routes. I also worked on the relationships between the route, stop and mapping tables so that selections could filter the relevant map and details.',
+      ],
+      bullets: [
+        {
+          title: 'Stop-Level Exploration',
+          description:
+            'Added KPIs, service-gap categories, population-group comparisons and a map to help users investigate stops with relatively high demand scores and lower service scores.',
+        },
+        {
+          title: 'Route-Level Exploration',
+          description:
+            'Added route length, estimated catchment population, a relative pressure percentile and an inferred stop-sequence table. Users can select routes and explore their mapped stops.',
+        },
+        {
+          title: 'Dynamic Insights and Rankings',
+          description:
+            'Used DAX measures, rankings, bookmarks and text-based insight cards to make route comparisons easier to explore without adding unnecessary pages or charts.',
+        },
+      ],
+    },
 
-      {
-        heading: '3. Power BI Architecture and DAX Logic',
-        paragraphs: [
-          'I built an interactive routing dashboard but faced a major technical conflict where disconnected map slicers and interactive Top 10 tables would cancel each other out.',
-        ],
-        bullets: [
-          {
-            title: 'The Map Bouncer Logic',
-            description:
-              'Engineered a DAX workaround using the ISFILTERED function to act as a logic gate.',
-          },
-          {
-            title: 'Forced Compliance',
-            description:
-              'This logic forced the map engine to obey user table clicks without breaking the disconnected slicer functionality.',
-          },
-        ],
-      },
+    {
+      heading: '4. Findings and What the Project Achieved',
+      paragraphs: [
+        'The final datasets contain 4,655 stops, 3,398 retained routes and 114,608 inferred route-stop clusters. The dashboard provides a way to examine the data at both stop and route level instead of relying only on isolated route or stop counts.',
+      ],
+      bullets: [
+        {
+          title: 'Stops Flagged for Review',
+          description:
+            '413 stops (8.9%) crossed the project-defined critical-gap threshold, while 1,159 stops (24.9%) fell into the broader potential service-gap category. These are screening results, not confirmed service failures.',
+        },
+        {
+          title: 'Population-Group Comparison',
+          description:
+            'The very-high relative population-catchment group had an average gap score of 28.79, compared with -26.40 for the low group. This suggests that the demand proxy and service proxy differ across the groups in this dataset.',
+        },
+        {
+          title: 'A Reusable Analysis Workflow',
+          description:
+            'Prepared three connected datasets for the dashboard: a stop-level table, an enriched route-level table and a route-stop mapping table. The work brought data preparation, spatial analysis, custom calculations and interactive reporting together in one project.',
+        },
+      ],
+    },
 
-      {
-        heading: '4. The Final Impact',
-        paragraphs: [
-          'This project turned a disconnected pile of GPS coordinates into an enterprise grade transit planning tool.',
-        ],
-        bullets: [
-          {
-            title: 'Data Pipeline',
-            description:
-              'Successfully identified 627 critically underserved bus stops suffering from a severe supply and demand imbalance.',
-          },
-          {
-            title: 'Automated Insight Panel',
-            description:
-              'Added a DAX driven text generator that automatically reads the Pressure Index and outputs simple text summaries for decision makers.',
-          },
-        ],
-      },
-    ],
-  },
+    {
+      heading: 'Limitations and Next Steps',
+      paragraphs: [
+        'This is an exploratory portfolio project rather than an operational BMTC service audit. The population estimates represent nearby residents, not passenger demand. The route-stop relationships and stop sequences are inferred from geometry and spatial proximity, so they may include stops that are not actually served by a route. The custom scores are relative indicators designed for this analysis, not official transport-planning standards.',
+      ],
+    },
+  ],
+},
   //Project 3
   {
     id: 'anomly',
