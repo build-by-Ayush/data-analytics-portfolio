@@ -243,7 +243,7 @@ export const projects = [
     id: 'ecommerce-funnel',
     title: 'E-Commerce Business Intelligence & Funnel Analytics Platform',
     subtitle:
-      'End-to-end customer journey analytics with financial leakage diagnostics',
+      'An interactive dashboard for analyzing sales, customer conversion, returns, and product performance',
 
     thumbnail: '/projects/project1/thumb.png',
     status: "Completed",
@@ -255,34 +255,35 @@ export const projects = [
 
     // Used in Project Detail page
     tools: [
-      'Python (Pandas, Plotly)',
+      'Python (Pandas)',
       'Streamlit',
-      'GitHub (Automated Sync)',
-      'CSV / Excel Data Structures',
+      'Plotly',
+      'GitHub',
+      'CSV Data Processing',
     ],
 
     techniques: [
-      'Funnel Drop-off Diagnostics',
-      'Relational Data Modeling',
-      'Profit Allocation Logic',
-      'Rule-Based Alert Engine',
-      'ETL Pipeline Simulation',
+      'Sales and Profit Analysis',
+      'Customer Funnel Analysis',
+      'Return Rate and Refund Analysis',
+      'Product Performance Comparison',
+      'Data Validation and Metric Calculation',
     ],
 
     metrics: [
       {
-        value: '61.3%',
-        unit: 'Drop',
-        label: 'CHECKOUT DROP-OFF',
+        value: '8.37',
+        unit: '%',
+        label: 'VISIT-TO-PURCHASE CONVERSION',
         description:
-          'Identified the exact conversion friction point in the customer journey.',
+          'The percentage of visit sessions that reached a purchase in the analyzed data.',
       },
       {
-        value: '5',
-        unit: "Tables",
-        label: 'RELATIONAL SCHEMA',
+        value: '74.24',
+        unit: '%',
+        label: 'CHECKOUT-TO-PURCHASE DROP-OFF',
         description:
-          'Modeled events, transactions, returns, and products into a connected ecosystem.',
+          'The percentage of checkout-start sessions that did not reach the purchase stage in the funnel.',
       },
     ],
 
@@ -304,257 +305,259 @@ export const projects = [
       {
         heading: 'The Business Problem',
         paragraphs: [
-          'Standard dashboards only report what was sold. They fail to explain where users dropped off before buying or how much profit leaked through returns after purchase. To solve this, I built a four-layer diagnostic system that tracks the complete customer journey from first visit to post-purchase.',
+          'Sales figures alone do not show how customers move through an online store, where potential purchases are lost, or how returns affect product performance. I built this project to explore these questions through a multi-page dashboard covering sales, customer activity, returns, and product profitability.',
         ],
       },
 
       {
-        heading: '1. Funnel & Behavioral Diagnostics',
+        heading: '1. Customer Funnel Analysis',
         paragraphs: [
-          'I engineered a multi-stage funnel module (Visit → Search → View → Cart → Checkout → Purchase) to locate exact friction points.',
+          'I analyzed the customer journey across five stages: Visit → View → Add to Cart → Checkout Start → Purchase. The dashboard compares session counts and conversion between consecutive stages.',
         ],
         bullets: [
           {
-            title: 'Drop-Off Tracking',
+            title: 'Conversion and Drop-Off',
             description:
-              'Programmed logic to identify that 61.3% of users abandon the journey specifically at checkout.',
+              'The overall visit-to-purchase conversion was 8.37%. The largest drop-off in the measured funnel was between checkout start and purchase, at 74.24%.',
           },
           {
-            title: 'Friction Analysis',
+            title: 'Customer Behavior',
             description:
-              'Measured the median time delay between user actions to flag UI hesitation and device-specific conversion issues.',
-          },
-        ],
-      },
-
-      {
-        heading: '2. Returns & Financial Leakage',
-        paragraphs: [
-          'Returns are usually treated as an operations problem; I modeled them as a financial problem.',
-        ],
-        bullets: [
-          {
-            title: 'Net Revenue Modeling',
-            description:
-              'Built metrics for Net Revenue After Returns and Pending Refund Exposure to measure true realized value.',
-          },
-          {
-            title: 'Root Cause Heatmaps',
-            description:
-              'Correlated return reasons with specific product categories to identify why profit was leaking.',
+              'Compared conversion across devices and other available customer segments, and examined the time between consecutive events to understand differences in the observed journey.',
           },
         ],
       },
 
       {
-        heading: '3. Product Health & Profit Allocation',
+        heading: '2. Returns and Refund Analysis',
         paragraphs: [
-          'Raw revenue is misleading when products have high return rates or low margins.',
+          'I created a dashboard page to examine return requests, refund amounts, return reasons, and differences across products and customer segments.',
         ],
         bullets: [
           {
-            title: 'Profit Distribution',
+            title: 'Return and Refund Metrics',
             description:
-              'Created a mathematical model to distribute order-level profit proportionally to individual products.',
+              'Calculated a return-request unit rate of 9.43%, using requested units divided by units sold. The dashboard also separates approved refund amounts from estimated exposure for pending requests.',
           },
           {
-            title: '4-Quadrant Matrix',
+            title: 'Return Patterns',
             description:
-              'Segmented products into Stars, Hidden Gems, Inefficient, and Loss-Making using revenue, profit, and return risk.',
+              'Compared return reasons, product categories, and available customer segments to highlight areas that may need further investigation.',
           },
         ],
       },
 
       {
-        heading: '4. Architecture & The Insight Engine',
+        heading: '3. Product Sales and Profitability',
         paragraphs: [
-          'Public datasets rarely contain connected behavioral and transactional layers, so I engineered the complete analytical ecosystem myself.',
+          'I compared products using sales, gross profit, profit margin, units sold, and return requests instead of relying on sales alone.',
         ],
         bullets: [
           {
-            title: 'Data Pipeline',
+            title: 'Product-Level Financials',
             description:
-              'Built a Python engine that generates realistic, connected time-series data across five relational tables.',
+              'Combined order and item information to calculate product-level sales and gross profit. Where transaction totals were available at order level, sales were allocated across the items in that order.',
           },
           {
-            title: 'Automated Sync',
+            title: 'Product Comparison',
             description:
-              'Created a GitHub synchronization workflow that automatically refreshes the deployed Streamlit application whenever monthly data is updated.',
+              'Used product comparison charts and tables to distinguish products with strong sales or profit from those with lower performance or higher return-request rates.',
+          },
+        ],
+      },
+
+      {
+        heading: '4. Data Structure and Dashboard Development',
+        paragraphs: [
+          'I worked with five connected tables covering customer events, transactions, order items, products, and returns. This structure allowed behavioral activity to be analyzed alongside sales and post-purchase information.',
+        ],
+        bullets: [
+          {
+            title: 'Data Processing',
+            description:
+              'Used Python and Pandas to load, clean, combine, and summarize the data before displaying the results in the dashboard.',
           },
           {
-            title: 'Rule-Based Insight Engine',
+            title: 'Data Validation',
             description:
-              'Developed a rule engine that automatically interprets KPIs and generates plain-language business alerts, transforming the dashboard into an active decision-support platform.',
+              'Checked important totals and relationships, including whether transaction sales matched the corresponding order-item sales and whether return requests could be linked to order items.',
+          },
+          {
+            title: 'Rule-Based Dashboard Signals',
+            description:
+              'Added conditional insights that highlight selected patterns, such as low conversion or high funnel drop-off, using predefined rules and calculated metrics.',
           },
         ],
       },
     ],
   },
+
   //Project 2
   {
-  id: 'bmtc',
-  title: 'BMTC Transit Accessibility & Service Gap Analysis',
-  subtitle:
-    'Exploring bus-stop service gaps using geospatial analysis and nearby population estimates',
+    id: 'bmtc',
+    title: 'BMTC Transit Accessibility & Service Gap Analysis',
+    subtitle:
+      'Exploring bus-stop service gaps using geospatial analysis and nearby population estimates',
 
-  thumbnail: '/projects/project2/thumb.png',
-  status: 'Completed',
+    thumbnail: '/projects/project2/thumb.png',
+    status: 'Completed',
 
-  themeColor: '#EAB308',
+    themeColor: '#EAB308',
 
-  // Used ONLY on Overview Featured Projects & Project List
-  tags: ['Power BI', 'Python', 'Geospatial Analysis'],
+    // Used ONLY on Overview Featured Projects & Project List
+    tags: ['Power BI', 'Python', 'Geospatial Analysis'],
 
-  // Used in Project Detail page
-  tools: [
-    'Power BI (DAX, Power Query)',
-    'Python (Pandas, GeoPandas)',
-    'GHSL Population Data',
-  ],
+    // Used in Project Detail page
+    tools: [
+      'Power BI (DAX, Power Query)',
+      'Python (Pandas, GeoPandas)',
+      'GHSL Population Data',
+    ],
 
-  techniques: [
-    'Geospatial Analysis and Spatial Joins',
-    'Route-Stop Mapping and Clustering',
-    'Custom Demand, Supply and Gap Scores',
-    'Interactive Power BI Dashboards',
-  ],
+    techniques: [
+      'Geospatial Analysis and Spatial Joins',
+      'Route-Stop Mapping and Clustering',
+      'Custom Demand, Supply and Gap Scores',
+      'Interactive Power BI Dashboards',
+    ],
 
-  metrics: [
-    {
-      value: '4,655',
-      unit: 'Stops',
-      label: 'STOPS ANALYZED',
-      description:
-        'Prepared stop-level data with nearby population estimates and relative demand, supply and service-gap scores',
+    metrics: [
+      {
+        value: '4,655',
+        unit: 'Stops',
+        label: 'STOPS ANALYZED',
+        description:
+          'Prepared stop-level data with nearby population estimates and relative demand, supply and service-gap scores',
+      },
+      {
+        value: '413',
+        unit: 'Stops',
+        label: 'CRITICAL GAP FLAGS',
+        description:
+          '8.9% of analyzed stops crossed the project’s critical-gap threshold and were flagged for further review',
+      },
+    ],
+
+    showcase: [
+      '/projects/project2/Stops.png',
+      '/projects/project2/Routes 1.png',
+      '/projects/project2/Routes 2.png',
+    ],
+
+    links: {
+      github: 'https://github.com/build-by-Ayush/The-BMTC-Transit-Analysis-Dashboard.git',
+      liveDemo: null,
+      video: null,
     },
-    {
-      value: '413',
-      unit: 'Stops',
-      label: 'CRITICAL GAP FLAGS',
-      description:
-        '8.9% of analyzed stops crossed the project’s critical-gap threshold and were flagged for further review',
-    },
-  ],
 
-  showcase: [
-    '/projects/project2/Stops.png',
-    '/projects/project2/Routes 1.png',
-    '/projects/project2/Routes 2.png',
-  ],
+    insights: [
+      {
+        heading: 'The Problem',
+        paragraphs: [
+          "I wanted to explore whether recorded bus service indicators were broadly aligned with the population living near bus stops in Bengaluru. Finding data that was ready for this analysis was a challenge. The available BMTC-derived dataset provided stop locations, route geometries and service counts, but it did not provide a dependable route-to-stop mapping or actual passenger ridership data. I therefore focused on building an exploratory analysis using the available information and clearly documenting its limitations.",
+        ],
+      },
 
-  links: {
-    github: 'https://github.com/build-by-Ayush/The-BMTC-Transit-Analysis-Dashboard.git',
-    liveDemo: null,
-    video: null,
+      {
+        heading: '1. Preparing the Data',
+        paragraphs: [
+          'I used Python to clean the stop and route data and prepare it for spatial analysis. I also explored publicly available data sources for population information and integrated GHSL (Global Human Settlement Layer) population data to estimate the population surrounding each stop.',
+        ],
+        bullets: [
+          {
+            title: 'Population Around Bus Stops',
+            description:
+              'Created a 1 km catchment around each stop and estimated its surrounding population from the GHSL population raster. This provides a local population proxy, not a count of bus passengers.',
+          },
+          {
+            title: 'Connecting Stops and Routes',
+            description:
+              'Used GeoPandas to match stops within a 50 m buffer of route geometries. I then grouped nearby candidates using a 100 m clustering rule to reduce potential duplicate matches and estimate the stop sequence along each route.',
+          },
+        ],
+      },
+
+      {
+        heading: '2. Comparing Demand and Supply',
+        paragraphs: [
+          'I created custom scores to compare the relative population around each stop with the available service indicators in the dataset. The scores make different measurements easier to compare, while remaining transparent about the assumptions behind them.',
+        ],
+        bullets: [
+          {
+            title: 'Demand and Supply Scores',
+            description:
+              'Used percentile-based scores for catchment population, route count and recorded trip count. The supply score gives equal weight to relative route diversity and recorded service volume.',
+          },
+          {
+            title: 'Service Gap Score',
+            description:
+              'Calculated the difference between demand and supply scores. Positive values flag stops where the population proxy ranks higher than the service proxy, helping identify locations for further investigation.',
+          },
+          {
+            title: 'Route Population and Pressure',
+            description:
+              'Combined unique population-raster cells across the inferred stop catchments of each route. Dividing this estimate by the route’s recorded trip count created a population-to-service indicator that can be compared across routes.',
+          },
+        ],
+      },
+
+      {
+        heading: '3. Building the Power BI Dashboard',
+        paragraphs: [
+          'I used Power BI and DAX to turn the prepared datasets into two interactive pages: one for exploring individual bus stops and another for comparing routes. I also worked on the relationships between the route, stop and mapping tables so that selections could filter the relevant map and details.',
+        ],
+        bullets: [
+          {
+            title: 'Stop-Level Exploration',
+            description:
+              'Added KPIs, service-gap categories, population-group comparisons and a map to help users investigate stops with relatively high demand scores and lower service scores.',
+          },
+          {
+            title: 'Route-Level Exploration',
+            description:
+              'Added route length, estimated catchment population, a relative pressure percentile and an inferred stop-sequence table. Users can select routes and explore their mapped stops.',
+          },
+          {
+            title: 'Dynamic Insights and Rankings',
+            description:
+              'Used DAX measures, rankings, bookmarks and text-based insight cards to make route comparisons easier to explore without adding unnecessary pages or charts.',
+          },
+        ],
+      },
+
+      {
+        heading: '4. Findings and What the Project Achieved',
+        paragraphs: [
+          'The final datasets contain 4,655 stops, 3,398 retained routes and 114,608 inferred route-stop clusters. The dashboard provides a way to examine the data at both stop and route level instead of relying only on isolated route or stop counts.',
+        ],
+        bullets: [
+          {
+            title: 'Stops Flagged for Review',
+            description:
+              '413 stops (8.9%) crossed the project-defined critical-gap threshold, while 1,159 stops (24.9%) fell into the broader potential service-gap category. These are screening results, not confirmed service failures.',
+          },
+          {
+            title: 'Population-Group Comparison',
+            description:
+              'The very-high relative population-catchment group had an average gap score of 28.79, compared with -26.40 for the low group. This suggests that the demand proxy and service proxy differ across the groups in this dataset.',
+          },
+          {
+            title: 'A Reusable Analysis Workflow',
+            description:
+              'Prepared three connected datasets for the dashboard: a stop-level table, an enriched route-level table and a route-stop mapping table. The work brought data preparation, spatial analysis, custom calculations and interactive reporting together in one project.',
+          },
+        ],
+      },
+
+      {
+        heading: 'Limitations and Next Steps',
+        paragraphs: [
+          'This is an exploratory portfolio project rather than an operational BMTC service audit. The population estimates represent nearby residents, not passenger demand. The route-stop relationships and stop sequences are inferred from geometry and spatial proximity, so they may include stops that are not actually served by a route. The custom scores are relative indicators designed for this analysis, not official transport-planning standards.',
+        ],
+      },
+    ],
   },
 
-  insights: [
-    {
-      heading: 'The Problem',
-      paragraphs: [
-        "I wanted to explore whether recorded bus service indicators were broadly aligned with the population living near bus stops in Bengaluru. Finding data that was ready for this analysis was a challenge. The available BMTC-derived dataset provided stop locations, route geometries and service counts, but it did not provide a dependable route-to-stop mapping or actual passenger ridership data. I therefore focused on building an exploratory analysis using the available information and clearly documenting its limitations.",
-      ],
-    },
-
-    {
-      heading: '1. Preparing the Data',
-      paragraphs: [
-        'I used Python to clean the stop and route data and prepare it for spatial analysis. I also explored publicly available data sources for population information and integrated GHSL (Global Human Settlement Layer) population data to estimate the population surrounding each stop.',
-      ],
-      bullets: [
-        {
-          title: 'Population Around Bus Stops',
-          description:
-            'Created a 1 km catchment around each stop and estimated its surrounding population from the GHSL population raster. This provides a local population proxy, not a count of bus passengers.',
-        },
-        {
-          title: 'Connecting Stops and Routes',
-          description:
-            'Used GeoPandas to match stops within a 50 m buffer of route geometries. I then grouped nearby candidates using a 100 m clustering rule to reduce potential duplicate matches and estimate the stop sequence along each route.',
-        },
-      ],
-    },
-
-    {
-      heading: '2. Comparing Demand and Supply',
-      paragraphs: [
-        'I created custom scores to compare the relative population around each stop with the available service indicators in the dataset. The scores make different measurements easier to compare, while remaining transparent about the assumptions behind them.',
-      ],
-      bullets: [
-        {
-          title: 'Demand and Supply Scores',
-          description:
-            'Used percentile-based scores for catchment population, route count and recorded trip count. The supply score gives equal weight to relative route diversity and recorded service volume.',
-        },
-        {
-          title: 'Service Gap Score',
-          description:
-            'Calculated the difference between demand and supply scores. Positive values flag stops where the population proxy ranks higher than the service proxy, helping identify locations for further investigation.',
-        },
-        {
-          title: 'Route Population and Pressure',
-          description:
-            'Combined unique population-raster cells across the inferred stop catchments of each route. Dividing this estimate by the route’s recorded trip count created a population-to-service indicator that can be compared across routes.',
-        },
-      ],
-    },
-
-    {
-      heading: '3. Building the Power BI Dashboard',
-      paragraphs: [
-        'I used Power BI and DAX to turn the prepared datasets into two interactive pages: one for exploring individual bus stops and another for comparing routes. I also worked on the relationships between the route, stop and mapping tables so that selections could filter the relevant map and details.',
-      ],
-      bullets: [
-        {
-          title: 'Stop-Level Exploration',
-          description:
-            'Added KPIs, service-gap categories, population-group comparisons and a map to help users investigate stops with relatively high demand scores and lower service scores.',
-        },
-        {
-          title: 'Route-Level Exploration',
-          description:
-            'Added route length, estimated catchment population, a relative pressure percentile and an inferred stop-sequence table. Users can select routes and explore their mapped stops.',
-        },
-        {
-          title: 'Dynamic Insights and Rankings',
-          description:
-            'Used DAX measures, rankings, bookmarks and text-based insight cards to make route comparisons easier to explore without adding unnecessary pages or charts.',
-        },
-      ],
-    },
-
-    {
-      heading: '4. Findings and What the Project Achieved',
-      paragraphs: [
-        'The final datasets contain 4,655 stops, 3,398 retained routes and 114,608 inferred route-stop clusters. The dashboard provides a way to examine the data at both stop and route level instead of relying only on isolated route or stop counts.',
-      ],
-      bullets: [
-        {
-          title: 'Stops Flagged for Review',
-          description:
-            '413 stops (8.9%) crossed the project-defined critical-gap threshold, while 1,159 stops (24.9%) fell into the broader potential service-gap category. These are screening results, not confirmed service failures.',
-        },
-        {
-          title: 'Population-Group Comparison',
-          description:
-            'The very-high relative population-catchment group had an average gap score of 28.79, compared with -26.40 for the low group. This suggests that the demand proxy and service proxy differ across the groups in this dataset.',
-        },
-        {
-          title: 'A Reusable Analysis Workflow',
-          description:
-            'Prepared three connected datasets for the dashboard: a stop-level table, an enriched route-level table and a route-stop mapping table. The work brought data preparation, spatial analysis, custom calculations and interactive reporting together in one project.',
-        },
-      ],
-    },
-
-    {
-      heading: 'Limitations and Next Steps',
-      paragraphs: [
-        'This is an exploratory portfolio project rather than an operational BMTC service audit. The population estimates represent nearby residents, not passenger demand. The route-stop relationships and stop sequences are inferred from geometry and spatial proximity, so they may include stops that are not actually served by a route. The custom scores are relative indicators designed for this analysis, not official transport-planning standards.',
-      ],
-    },
-  ],
-},
   //Project 3
   {
     id: 'anomly',
@@ -685,6 +688,7 @@ export const projects = [
       },
     ],
   },
+
   //Project 4
   {
     id: 'adventure',
